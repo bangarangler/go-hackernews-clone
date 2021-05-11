@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/bangarangler/go_hackernews_clone/database"
+	// "github.com/bangarangler/go-hackernews-clone/internal/pkg/pg"
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/99designs/gqlgen/graphql/playground"
 	"github.com/bangarangler/go-hackernews-clone/graph"

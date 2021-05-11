@@ -6,7 +6,7 @@ import (
 
 	"github.com/golang-migrate/migrate"
 	"github.com/golang-migrate/migrate/v4/database/postgres"
-	_ "github.com/lib/pq"
+	"github.com/lib/pq"
 )
 
 var Db *sql.DB

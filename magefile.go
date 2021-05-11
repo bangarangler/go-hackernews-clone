@@ -7,6 +7,7 @@ import (
 	"os"
 	"os/exec"
 
+	goDotEnvVar "github.com/bangarangler/go-hackernews-clone/internal/pkg/db/pg"
 	"github.com/magefile/mage/mg" // mg contains helpful utility functions, like Deps
 	"github.com/magefile/mage/sh"
 )
@@ -25,16 +26,23 @@ func Build() error {
 
 func StartDocker() error {
 	fmt.Println("Mage starting postgres container...")
-	cmd := exec.Command("docker", "compose", "up", "-d")
-	return cmd.Run()
+	return sh.Run("docker-compose", "up", "-d")
+	// return cmd.Run()
 }
 
 // Stop Running Postgres Docker Container.  under the hood running docker
 // compose down
 func StopDocker() error {
 	fmt.Println("Mage stoping postgres container...")
-	cmd := exec.Command("docker", "compose", "down")
-	return cmd.Run()
+	return sh.Run("docker", "compose", "down")
+	// return cmd.Run()
+}
+
+func MigratePG() error {
+	fmt.Println("Mage ... go-migrate running migrations...")
+	test := goDotEnvVar("POSTGRES_URL")
+	fmt.Println("test", test)
+	// return sh.Run("migrate", "-database", goDotEnvVar("POSTGRES_URL"), "-path", "internal/pkg/db/migrations/pg", "up")
 }
 
 // A custom install step if you need your bin someplace other than go/bin
