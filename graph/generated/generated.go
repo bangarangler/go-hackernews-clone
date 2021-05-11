@@ -294,7 +294,6 @@ type Mutation {
   login(input: Login!): String!
   refreshToken(input: RefreshTokenInput!): String!
 }
-
 `, BuiltIn: false},
 }
 var parsedSchema = gqlparser.MustLoadSchema(sources...)
