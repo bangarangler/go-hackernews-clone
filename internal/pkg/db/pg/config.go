@@ -15,4 +15,5 @@ func goDotEnvVar(key string) string {
 	return os.Getenv(key)
 }
 
-var pgConnStr = goDotEnvVar("POSTGRES_URL")
+var PgConnStr = goDotEnvVar("POSTGRES_URL")
+var PORT = goDotEnvVar("PORT")

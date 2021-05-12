@@ -5,14 +5,15 @@ import (
 	"log"
 
 	"github.com/golang-migrate/migrate"
+	_ "github.com/golang-migrate/migrate/source/file"
 	"github.com/golang-migrate/migrate/v4/database/postgres"
-	"github.com/lib/pq"
+	_ "github.com/lib/pq"
 )
 
 var Db *sql.DB
 
 func InitDB() {
-	db, err := sql.Open("postgres", goDotEnvVar("POSTGRES_URL"))
+	db, err := sql.Open("postgres", PgConnStr)
 	if err != nil {
 		log.Panic(err)
 	}
@@ -27,7 +28,7 @@ func Migrate() {
 	if err := Db.Ping(); err != nil {
 		log.Fatal(err)
 	}
-	driver, _ := postgres.WithInstance(Db, *postgres.Config())
+	driver, _ := postgres.WithInstance(Db, *postgres.Config{})
 	m, _ := migrate.NewWithDatabaseInstance(
 		"file://internal/pkg/db/migrations/pg",
 		"postgres",
